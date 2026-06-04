@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using com.IvanMurzak.McpPlugin.Common.Model;
+using com.IvanMurzak.ReflectorNet;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;

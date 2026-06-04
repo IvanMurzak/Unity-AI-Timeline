@@ -97,15 +97,17 @@ namespace com.IvanMurzak.Unity.MCP.Timeline.Editor.Tests
             Assert.AreEqual(1.0, add.start, 0.0001, "Start should be 1.0");
             Assert.AreEqual(3.0, add.duration, 0.0001, "Duration should be 3.0");
 
+            // Note: an ActivationPlayableAsset has ClipCaps.None, so blend/ease/clipIn all clamp to 0.
+            // start and duration are always directly settable.
             var timing = tool.SetClipTiming(assetPath: path, clipIndex: 0, trackName: "Act",
-                duration: 4.0, blendInDuration: 0.5, easeOutDuration: 0.25);
+                start: 0.5, duration: 4.0);
             Assert.IsTrue(timing.success, "SetClipTiming should succeed");
             Assert.AreEqual(4.0, timing.duration, 0.0001, "Duration should be updated to 4.0");
-            Assert.AreEqual(0.5, timing.blendInDuration, 0.0001, "Blend-in should be 0.5");
+            Assert.AreEqual(0.5, timing.start, 0.0001, "Start should be updated to 0.5");
 
             var move = tool.MoveClip(assetPath: path, clipIndex: 0, trackName: "Act", deltaSeconds: 2.0);
             Assert.IsTrue(move.success, "MoveClip should succeed");
-            Assert.AreEqual(3.0, move.newStart, 0.0001, "Start should move from 1.0 to 3.0");
+            Assert.AreEqual(2.5, move.newStart, 0.0001, "Start should move from 0.5 to 2.5");
             Assert.AreEqual(4.0, move.duration, 0.0001, "Duration preserved on move");
 
             yield return null;
