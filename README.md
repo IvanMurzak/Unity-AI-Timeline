@@ -13,6 +13,8 @@
 
 </div>
 
+<img width="100%" alt="Timeline" src="https://github.com/IvanMurzak/Unity-AI-Timeline/raw/main/docs/promo/promo-timeline.gif"/>
+
 AI-powered tools for the Unity [Timeline](https://docs.unity3d.com/Packages/com.unity.timeline@1.8) cutscene & sequencing workflow. Create `TimelineAsset`s, add Animation / Activation / Audio / Signal / Control tracks, add and time clips (start, duration, blends, eases), place signal markers, bind a `PlayableDirector` and its per-track scene bindings, list and inspect everything, and modify any Timeline object field directly — all through natural language commands, no manual Timeline-window navigation. Wraps `com.unity.timeline` **1.8.12**. Ideal for rapid cutscene blocking, sequence authoring, and procedural timeline rigs. Built on top of the [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP) platform.
 
 ### How to use
