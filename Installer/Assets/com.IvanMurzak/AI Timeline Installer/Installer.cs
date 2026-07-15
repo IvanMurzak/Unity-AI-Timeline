@@ -19,7 +19,7 @@ namespace com.IvanMurzak.Unity.MCP.Timeline.Installer
     public static partial class Installer
     {
         public const string PackageId = "com.ivanmurzak.unity.mcp.timeline";
-        public const string Version = "1.0.11";
+        public const string Version = "1.0.12";
 
         static Installer()
         {
