@@ -1,0 +1,41 @@
+Unity-Package/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_16debb61b57231 4,10,16
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_5d35e3f6e16752 4,10,16
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/McpPlugin.Common.dll.meta
+  s_f7f7392a09f46e::t_2b624f8c26fdfc 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/McpPlugin.dll.meta
+  s_f7f7392a09f46e::t_f2a6094c3b8f99 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/Microsoft.Extensions.DependencyInjection.Abstractions.dll.meta
+  s_f7f7392a09f46e::t_c14dba075565ee 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/Microsoft.Extensions.Logging.Abstractions.dll.meta
+  s_f7f7392a09f46e::t_266dd6407d9776 14-19,28
+Unity-Tests/2022.3.62f3/Assets/Plugins/NuGet/System.Runtime.CompilerServices.Unsafe.dll.meta
+  s_f7f7392a09f46e::t_325f224878ffc4 14-19,28
+Unity-Tests/2022.3.62f3/Packages/packages-lock.json
+  s_f7f7392a09f46e::t_79e2971193e440 4,19
+Unity-Tests/2023.2.22f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_773e73ce25367f 4,10,16
+Unity-Tests/2023.2.22f1/Packages/packages-lock.json
+  s_f7f7392a09f46e::t_fcfd2dd7dcc013 4,19
+Unity-Tests/6000.3.1f1/Assets/Plugins/NuGet/.nuget-installed.json
+  s_f7f7392a09f46e::t_fc1af7f5e3b344 4,10,16
+Unity-Tests/6000.3.1f1/Packages/packages-lock.json
+  s_f7f7392a09f46e::t_6ff0acf08ed3b4 4,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "5717e577f1898b202c72fa733f34c9ec0725ff81",
+  "prompts": {},
+  "sessions": {
+    "s_f7f7392a09f46e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6d5d57f-6526-4873-9255-59c34d4f8571",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}
