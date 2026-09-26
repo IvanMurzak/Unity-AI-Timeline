@@ -9,7 +9,7 @@
 */
 
 #nullable enable
-#if UNITY_6000_5_OR_NEWER
+#if !UNITY_6000_5_OR_NEWER
 using System.Collections;
 using AIGD;
 using com.IvanMurzak.Unity.MCP.Editor.API;
@@ -138,7 +138,7 @@ namespace com.IvanMurzak.Unity.MCP.Timeline.Editor.Tests
 
             var go = new GameObject("DirectorHost");
             var result = tool.BindDirector(
-                gameObjectRef: new GameObjectRef(go.GetEntityId()),
+                gameObjectRef: new GameObjectRef(go.GetInstanceID()),
                 assetPath: path,
                 playOnAwake: true);
 
@@ -160,15 +160,15 @@ namespace com.IvanMurzak.Unity.MCP.Timeline.Editor.Tests
             tool.AddTrack(assetPath: path, trackType: "Animation", trackName: "Anim");
 
             var dirGo = new GameObject("DirectorHost");
-            tool.BindDirector(new GameObjectRef(dirGo.GetEntityId()), path);
+            tool.BindDirector(new GameObjectRef(dirGo.GetInstanceID()), path);
 
             var targetGo = new GameObject("AnimTarget");
             targetGo.AddComponent<Animator>();
 
             var result = tool.BindTrack(
-                directorRef: new GameObjectRef(dirGo.GetEntityId()),
+                directorRef: new GameObjectRef(dirGo.GetInstanceID()),
                 trackName: "Anim",
-                targetRef: new GameObjectRef(targetGo.GetEntityId()));
+                targetRef: new GameObjectRef(targetGo.GetInstanceID()));
 
             Assert.IsTrue(result.success, "BindTrack should succeed");
             StringAssert.Contains("Animator", result.boundType, "Should bind the Animator component");
