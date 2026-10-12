@@ -1,0 +1,22 @@
+Unity-Package/Assets/root/Tests/Editor/TestTimelineLifecycle.cs
+  s_6908d424636975::t_c6b8450229f215 100-101,103,106
+  s_6908d424636975::t_34603cc84a159f 110
+Unity-Package/Assets/root/Tests/Editor/BaseTest.cs
+  s_6908d424636975::t_690bd522ecf645 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ebd162e9b8a6e9f4d2096b2a5efb886b3fbe80db",
+  "prompts": {},
+  "sessions": {
+    "s_6908d424636975": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "383d28d1-a361-40a7-9656-23c1b29d7a19",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <ivandmurzak@gmail.com>"
+    }
+  }
+}

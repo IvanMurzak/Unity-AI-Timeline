@@ -1,0 +1,23 @@
+"Installer/Assets/com.IvanMurzak/AI Timeline Installer/Installer.cs"
+  s_f7f7392a09f46e::t_e5cc3f8cb3ed1c 22
+Unity-Package/Packages/com.ivanmurzak.unity.mcp.timeline/package.json
+  s_f7f7392a09f46e::t_47a76280d2c83c 18,22
+Unity-Package/Packages/packages-lock.json
+  s_f7f7392a09f46e::t_05cfd5468b0a6a 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "655e72b8ad767525819ae2f2ce84045a3b7a599d",
+  "prompts": {},
+  "sessions": {
+    "s_f7f7392a09f46e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6d5d57f-6526-4873-9255-59c34d4f8571",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}
