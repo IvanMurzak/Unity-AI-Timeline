@@ -1,19 +1,18 @@
 # AGENTS.md — Unity-AI-Timeline
 
-Unity package `com.ivanmurzak.unity.mcp.timeline` — wraps **Unity Timeline** (`com.unity.timeline`) as
-`timeline-*` MCP tools (branch `experiment/rql`: an RQL module instead): create `TimelineAsset`s, add/remove
-tracks (Animation / Activation / Audio / Signal / Control / Playable / Group), add and time clips, place
-markers, bind a `PlayableDirector` and its per-track scene bindings, list/inspect timelines, and modify arbitrary Timeline object fields. An extension of
+Unity package `com.ivanmurzak.unity.mcp.timeline` — **Unity Timeline** (`com.unity.timeline`) for AI agents. It
+ships no MCP tools: an RQL module for Unity-MCP's `rql-query` / `rql-mutate` (create `TimelineAsset`s, add/remove tracks,
+add and time clips, place markers, bind a `PlayableDirector` and its per-track scene bindings). An extension of
 [AI Game Developer](https://github.com/IvanMurzak/Unity-MCP) (`com.ivanmurzak.unity.mcp`), generated from
-`Unity-AI-Tools-Template`; the user-facing tool list is in `README.md`.
+`Unity-AI-Tools-Template`; the former tool → RQL table is in `README.md`.
 
 ## Layout
 
 - `Unity-Package/` — Unity project hosting the package; only `Packages/com.ivanmurzak.unity.mcp.timeline/`
   ships.
   - `package.json` — the version source of truth and the dependency pins.
-  - `Editor/Scripts/Rql/` — branch `experiment/rql`: the `TimelineModule` (IRqlModule: `timeline` source, one adapter
-    per file, the agent guide); replaces the former `timeline-*` tools.
+  - `Editor/Scripts/Rql/` — the `TimelineModule` (IRqlModule: `timeline` source, one adapter per file, the agent
+    guide); replaces the former `timeline-*` tools.
   - `Runtime/` — runtime assembly (currently empty).
   - `Tests/Editor/Rql/` (EditMode, `TimelineTestBase` + one file per adapter / source) and `Tests/Runtime/` (PlayMode).
 - `Unity-Tests/<unity-version>/` — one test project per supported Unity version, consuming the package via
@@ -45,7 +44,7 @@ maintainer-applied `ci-ok` label and abort if the PR touches `.github/workflows/
 
 ## Critical invariants
 
-- **RQL surface (branch `experiment/rql`).** Agents use Unity-MCP's `rql-query` / `rql-mutate`; operations are adapter
+- **RQL surface.** Agents use Unity-MCP's `rql-query` / `rql-mutate`; operations are adapter
   methods on the owner type (TimelineAsset.AddTrack, TrackAsset.AddClip / AddMarker / Delete, TimelineClip.Delete,
   Marker.Delete), owner-less creation lives on the `timeline` source (`[RqlCallable]`), and every example belongs in the
   module guide (`TimelineModule.Guide`, rendered into the `unity-rql` skill).

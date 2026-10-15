@@ -33,34 +33,26 @@ AI-powered tools for the Unity [Timeline](https://docs.unity3d.com/Packages/com.
 | 2023.2.22f1   | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-2023-2-22f1-editmode)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)  | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-2023-2-22f1-playmode)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)  | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-2023-2-22f1-standalone)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)  |
 | 6000.3.1f1    | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-6000-3-1f1-editmode)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)   | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-6000-3-1f1-playmode)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)   | [![r](https://github.com/IvanMurzak/Unity-AI-Timeline/workflows/release/badge.svg?job=test-unity-6000-3-1f1-standalone)](https://github.com/IvanMurzak/Unity-AI-Timeline/actions/workflows/release.yml)   |
 
-## AI Timeline Tools
+## RQL (no extension tools)
 
-13 tools, grouped by purpose:
+With Unity-MCP 1.0.0 this package adds no MCP tools: it contributes an RQL module, so agents use `rql-query` /
+`rql-mutate` (the `unity-rql` skill carries the full guide with examples). `A` below stands for
+`unity.asset("Assets/Cutscenes/Intro.playable")`, `D` for `objects | get components | where $ is PlayableDirector`.
 
-### TimelineAsset lifecycle
-
-- `timeline-create` - Create a new empty `TimelineAsset` (.playable) at a project path
-- `timeline-list` - List every `TimelineAsset` in the project with track count and duration
-- `timeline-get` - Generic read: serialize a `TimelineAsset`, a track, or a clip's `PlayableAsset`
-- `timeline-modify` - Generic write: apply a `SerializedMember` diff to a Timeline object
-
-### Tracks
-
-- `timeline-track-add` - Add an Animation / Activation / Audio / Signal / Control / Playable / Group track
-- `timeline-track-remove` - Remove a track (and its clips/markers) by name or index
-- `timeline-track-list` - List a timeline's tracks with type, mute/lock state, and clips
-
-### Clips
-
-- `timeline-clip-add` - Add a clip (animation / audio / default) to a track
-- `timeline-clip-set-timing` - Set start, duration, clip-in, blends, eases and time scale of a clip
-- `timeline-clip-move` - Move a clip to an absolute start or by a relative delta (duration preserved)
-
-### Markers & bindings
-
-- `timeline-marker-add` - Add a marker (SignalEmitter by default) on a track or the marker track
-- `timeline-director-bind` - Bind a `TimelineAsset` to a scene `PlayableDirector` (adds it if missing)
-- `timeline-track-bind` - Bind a scene object/component to a Timeline output track via the director
+| Former tool | RQL |
+| --- | --- |
+| `timeline-create` | `timeline \| call Create("Assets/Cutscenes/Intro.playable", 30)` (path, frameRate?, fixedDuration?) |
+| `timeline-list` | `unity.assets("t:TimelineAsset") \| select $ref name duration frameRate tracks.name` |
+| `timeline-get` / `-modify` | plain `select` / `set` on the timeline, its tracks, clips (`… \| get clips \| set asset.removeStartOffset = false`) and markers |
+| `timeline-track-add` | `A \| call AddTrack("Animation", "Hero")` (type, name?, group?) |
+| `timeline-track-remove` | `A \| get tracks \| where name == "Door" \| call Delete()` |
+| `timeline-track-list` | `A \| get tracks \| recurse children \| select $depth name $type muted locked clips.count()` |
+| `timeline-clip-add` | `A \| get tracks \| where name == "Hero" \| call AddClip(unity.asset("Assets/Anim/Walk.anim"), 2, 3, "Walk")` |
+| `timeline-clip-set-timing` | `… \| get clips \| where displayName == "Walk" \| set duration = 4, clipIn = 0.25, timeScale = 1.5, easeInDuration = 0.5` |
+| `timeline-clip-move` | `… \| get clips \| where displayName == "Walk" \| set start = start + 0.5` |
+| `timeline-marker-add` | `A \| call AddMarker(3.5)` (timeline marker track) or `A \| get tracks \| where … \| call AddMarker(1, "Signal")` |
+| `timeline-director-bind` | `objects \| where name == "Cutscene" \| call AddComponent("PlayableDirector")`, then `D \| set playableAsset = A` |
+| `timeline-track-bind` | `D \| set bindings["Hero"] = ref("GameObject#…")` |
 
 ## License
 

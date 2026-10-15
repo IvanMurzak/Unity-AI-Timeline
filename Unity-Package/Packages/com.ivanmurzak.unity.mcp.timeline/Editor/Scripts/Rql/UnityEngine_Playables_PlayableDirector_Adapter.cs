@@ -37,8 +37,12 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.Timelines
         protected override void Members(MemberTable<PlayableDirector> m)
         {
             if (m.Untyped.Contains("playableGraph")) m.Hide("playableGraph");
-            m.Map<Object?>("bindings", Keys, (d, k) => Find(d, k).Count == 1 ? d.GetGenericBinding(Find(d, k)[0]) : null,
-                (d, k, v) => d.SetGenericBinding(Track(d, k), Narrow(Track(d, k), v, out _)),
+            m.Map<Object?>("bindings", Keys, (d, k) => Find(d, k) is { Count: 1 } found ? d.GetGenericBinding(found[0]) : null,
+                (d, k, v) =>
+                {
+                    var track = Track(d, k);
+                    d.SetGenericBinding(track, Narrow(track, v, out _));
+                },
                 (d, k, v) => Validate(d, k, v),
                 "scene object bound to each output track of the timeline, by track name (null = unbound)",
                 // Without a timeline every key "exists", so the write reaches validation and explains what is missing.
@@ -67,9 +71,10 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.Timelines
 
         private static string? Validate(PlayableDirector d, string key, Object? value)
         {
-            var problem = Problem(d, key, Find(d, key).Count);
+            var found = Find(d, key);
+            var problem = Problem(d, key, found.Count);
             if (problem != null) return problem;
-            Narrow(Track(d, key), value, out var reason);
+            Narrow(found[0], value, out var reason);
             return reason;
         }
 

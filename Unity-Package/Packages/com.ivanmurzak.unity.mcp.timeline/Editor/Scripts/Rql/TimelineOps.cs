@@ -123,19 +123,8 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.Timelines
             if (!path.StartsWith("Assets/", StringComparison.Ordinal)) throw new ArgumentException($"'{path}' must start with Assets/");
             if (!path.EndsWith(extension, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException($"'{path}' must end with {extension}");
             if (AssetDatabase.LoadMainAssetAtPath(path) != null) throw new ArgumentException($"an asset already exists at '{path}' (choose another path)");
-            EnsureFolder(Path.GetDirectoryName(path));
+            RqlEditorApi.Instance.CreateFolder(Path.GetDirectoryName(path)!);
             return path;
-        }
-
-        private static void EnsureFolder(string? folder)
-        {
-            if (string.IsNullOrEmpty(folder)) return;
-            folder = folder!.Replace('\\', '/').TrimEnd('/');
-            if (AssetDatabase.IsValidFolder(folder)) return;
-            var parent = Path.GetDirectoryName(folder)?.Replace('\\', '/');
-            if (string.IsNullOrEmpty(parent)) throw new ArgumentException($"'{folder}' is not under Assets/");
-            EnsureFolder(parent);
-            AssetDatabase.CreateFolder(parent, Path.GetFileName(folder));
         }
 
         public static string Describe(Object? o) => o == null ? "null" : $"{o.GetType().Name} '{o.name}'";
