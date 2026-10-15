@@ -81,7 +81,7 @@ objects | where name == ""Cutscene"" | call AddComponent(""PlayableDirector"")
 Crossfades (blendInDuration / blendOutDuration, read-only) come from overlapping clips: move a clip's start into its neighbour.
 Invalid values (negative times, eases longer than the clip, a time scale on clips that cannot change speed, a clip asset that does not fit the track, unknown track names)
 fail without changing anything; Timeline does not clamp them silently here. Creating, deleting and editing tracks, clips,
-markers and bindings is undoable; created asset files stay. Edits mark the .playable dirty: save with `editor | call SaveAssets()`.
+markers and bindings is undoable; created asset files stay. rql-mutate saves the edited .playable.
 Clips have no $ref: address them through their timeline (`… | get tracks | get clips | where …`).";
 
         public int Order => 100;

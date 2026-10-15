@@ -82,7 +82,11 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Rql.Timelines
                 case "easeInDuration":
                 case "easeOutDuration":
                     if (v < 0.0) return $"{member} {Num(v)} must be >= 0";
-                    if (v > clip.duration) return $"{member} {Num(v)} is longer than the clip ({Num(clip.duration)} s)";
+                    // Timeline clamps an ease to the part of the clip outside the opposite blend (crossfade): reject instead.
+                    var blend = member == "easeInDuration" ? clip.blendOutDuration : clip.blendInDuration;
+                    var available = clip.duration - Math.Max(blend, 0.0);
+                    if (v > available)
+                        return $"{member} {Num(v)} is longer than the clip ({Num(available)} s" + (blend > 0.0 ? $" outside its {Num(blend)} s blend)" : ")");
                     return Caps(ClipCaps.Blending, "blending / easing");
                 default:
                     return null;

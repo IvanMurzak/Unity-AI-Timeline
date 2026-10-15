@@ -86,6 +86,16 @@ namespace com.IvanMurzak.Unity.MCP.Editor.Tests.Rql.Timelines
         }
 
         [Test]
+        public void AnEaseLongerThanThePartOutsideTheBlendFailsInsteadOfBeingClamped()
+        {
+            Walk.blendOutDuration = 3.0; // a crossfade into a following clip leaves 1 s of the 4 s clip for the ease in
+            Fails(Clips + " | where displayName == \"Walk\" | set easeInDuration = 2", "longer than the clip (1 s outside its 3 s blend)");
+            Assert.AreEqual(0.0, Walk.easeInDuration, 1e-9);
+            Ok(Clips + " | where displayName == \"Walk\" | set easeInDuration = 0.5");
+            Assert.AreEqual(0.5, Walk.easeInDuration, 1e-9);
+        }
+
+        [Test]
         public void TheClipAssetIsReadOnlyButItsMembersAreWritable()
         {
             Fails(Clips + " | where displayName == \"Walk\" | set asset = null", "asset");
